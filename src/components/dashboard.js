@@ -11,15 +11,16 @@ class Dashboard extends Component {
   static propTypes = {
     todoList: PropTypes.array,
     isLoading: PropTypes.bool,
-    initTodoItemForUpdate:PropTypes.func.isRequired
+    initTodoItemForUpdate:PropTypes.func.isRequired,
+    featchCompleteToDoItem:PropTypes.func.isRequired
   };
 
   componentDidMount() {
     this.props.featchToDoItemsList();
   }
 
-  handleToggle = value => () => {
-  
+  handleToggle = todoItem => () => {
+    this.props.featchCompleteToDoItem(todoItem)
   }
 
   edit = todoitem => () => {
@@ -37,8 +38,8 @@ class Dashboard extends Component {
             <ListItem key={todoItem.id} dense button >
               <ListItemText primary={`Line item ${todoItem.title}`} onClick={this.edit(todoItem)} />
               <ListItemSecondaryAction>
-                <Checkbox disabled={ todoItem.completed}
-                  onChange={this.handleToggle(todoItem.id)}
+                <Checkbox disabled={ !todoItem.completed}
+                  onChange={this.handleToggle(todoItem)}
                 />
               </ListItemSecondaryAction>
             </ListItem>
