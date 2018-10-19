@@ -37,7 +37,6 @@ export default (state = initialState.addTaskData, action) => {
       case types.FETCH_UPDATE_TODO_STARTED:
       return {
         ...state,
-        ...state,
         addOrUpdateError:undefined,
         isLoading:true
       };

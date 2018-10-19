@@ -1,10 +1,18 @@
 import React from "react";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import Dashboard from './components/dashboardContainer'
+import AddTask from './components/addTaskContainer'
 
 import store from "./store";
-import Home from "./Home";
 
 export default () =>
-  <Provider store={store}>
-    <Home />
-  </Provider>;
+  (<Provider store={store}>
+    <Router>
+      <div>
+        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/AddTask" component={AddTask} />
+      </div>
+    </Router>
+  </Provider>);

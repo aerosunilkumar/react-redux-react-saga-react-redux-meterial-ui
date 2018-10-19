@@ -16,13 +16,12 @@ const mapStateToProps = state => ({
   completed: state.addTaskData.completed
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch =>
   bindActionCreators({
     featchAddToDoItem,
-    featchUpdateToDoItem,
+    featchUpdateToDoItem ,
     featchCompleteToDoItem,
     featchDeleteToDoItem
   }, dispatch);
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTask);

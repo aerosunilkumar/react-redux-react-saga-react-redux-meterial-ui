@@ -1,4 +1,4 @@
-const apiBase = 'http://practiceapi.devmountain.com';
+const apiBase = 'https://practiceapi.devmountain.com';
 
 function* getToDoListAPI() {
     const result = yield fetch(`${apiBase}/api/tasks`)
@@ -6,43 +6,48 @@ function* getToDoListAPI() {
     return yield result;
 }
 
+
+
 function* addToDoItemAPI(todoItem) {
-    return yield fetch(`${apiBase}/api/tasks`, {
+    const formdata=new FormData();
+    formdata.append('title',todoItem.title)
+      debugger;
+    const result= yield fetch(`${apiBase}/api/tasks`, {
         method: 'POST',
-        body: JSON.stringify(todoItem)
-    });
+        headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
+   }),
+        body: "title=test"
+    }).then(res => res.json());
+    return yield result;
 }
 
 function* updateToDoItemAPI(todoItem) {
-    return yield fetch(`${apiBase}/api/tasks/${todoItem.id}`, {
+    const result= yield fetch(`${apiBase}/api/tasks/${todoItem.id}`, {
         method: 'PATCH',
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(todoItem)
-    });
+            'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+          body: `title=${todoItem.title}&description=${todoItem.description}`
+    }).then(res => res.json());
+    return yield result;
 }
 
 function* deleteToDoItemAPI(todoItem) {
-    return yield fetch(`${apiBase}/api/tasks/${todoItem.id}`, {
-        method: 'DELETE',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        }
-    });
+    const result= yield fetch(`${apiBase}/api/tasks/${todoItem.id}`, {
+        method: 'DELETE'
+    }).then(res => res.json());
+    return yield result;
 }
 
 function* completeToDoItemAPI(todoItem) {
-    return yield fetch(`${apiBase}/api/tasks/${todoItem.id}`, {
+    const result= yield fetch(`${apiBase}/api/tasks/${todoItem.id}`, {
         method: 'PUT',
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(todoItem)
-    });
+            'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+    }).then(res => res.json());
+    return yield result;    
 }
 
 export const Api = {

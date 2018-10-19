@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import {
   featchToDoItemsList,
   featchCompleteToDoItem,
-  initTodoItemForUpdate
+  initTodoItemForUpdate,
+  featchDeleteToDoItem
 } from "../actions/index";
 import Dashboard from './dashboard';
 
@@ -16,7 +17,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({
     featchToDoItemsList,
     featchCompleteToDoItem,
-    initTodoItemForUpdate
+    initTodoItemForUpdate,
+    featchDeleteToDoItem
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
